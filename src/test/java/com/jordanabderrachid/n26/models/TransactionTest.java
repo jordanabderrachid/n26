@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.*;
 public class TransactionTest {
 
   @Test
-  public void  testHasParentTransaction() {
+  public void testHasParentTransaction() {
     Transaction transactionWithParent = new Transaction();
     transactionWithParent.setParentId(new Long(1));
 
