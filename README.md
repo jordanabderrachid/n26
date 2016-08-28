@@ -1,7 +1,7 @@
 # N26 - Transaction API
 
 #### TODO
-  - [ ] package refactoring
+  - [x] package refactoring
   - [ ] unit test
   - [ ] CI
   - [ ] documentation
