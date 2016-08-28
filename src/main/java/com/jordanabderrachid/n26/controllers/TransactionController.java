@@ -1,4 +1,14 @@
-package hello;
+package com.jordanabderrachid.n26.controllers;
+
+import com.jordanabderrachid.n26.exceptions.AlreadyUsedTransactionIdException;
+import com.jordanabderrachid.n26.exceptions.InvalidTransactionException;
+import com.jordanabderrachid.n26.exceptions.UnknownTransactionIdException;
+import com.jordanabderrachid.n26.exceptions.UnknownTransactionParentIdException;
+import com.jordanabderrachid.n26.models.HTTPResponse;
+import com.jordanabderrachid.n26.models.Transaction;
+import com.jordanabderrachid.n26.models.TransactionSumResponse;
+import com.jordanabderrachid.n26.services.TransactionService;
+import com.jordanabderrachid.n26.validators.TransactionValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +19,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/transactionservice",
-                produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+  produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 public class TransactionController {
 
   @Autowired
@@ -19,7 +29,7 @@ public class TransactionController {
   private TransactionValidator transactionValidator;
 
   @RequestMapping(value = "/transaction/{transactionId}",
-                  method = RequestMethod.GET)
+    method = RequestMethod.GET)
   @ResponseStatus(HttpStatus.OK)
   @ResponseBody
   public Transaction getTransaction(@PathVariable Long transactionId)
@@ -36,8 +46,8 @@ public class TransactionController {
   }
 
   @RequestMapping(value = "/transaction/{transactionId}",
-                  method = RequestMethod.PUT,
-                  consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    method = RequestMethod.PUT,
+    consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
   @ResponseStatus(HttpStatus.CREATED)
   @ResponseBody
   public HTTPResponse createTransaction(@PathVariable Long transactionId, @RequestBody Transaction transaction)
@@ -74,7 +84,7 @@ public class TransactionController {
   }
 
   @RequestMapping(value = "/types/{transactionType}",
-                  method = RequestMethod.GET)
+    method = RequestMethod.GET)
   @ResponseStatus(HttpStatus.OK)
   @ResponseBody
   public List<Long> getTransactionsByType(@PathVariable String transactionType) {
@@ -82,7 +92,7 @@ public class TransactionController {
   }
 
   @RequestMapping(value = "/sum/{transactionId}",
-                  method = RequestMethod.GET)
+    method = RequestMethod.GET)
   public TransactionSumResponse getTransactionSum(@PathVariable Long transactionId) throws UnknownTransactionIdException {
     return new TransactionSumResponse(this.transactionService.getTransactionSum(transactionId));
   }

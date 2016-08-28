@@ -1,4 +1,9 @@
-package hello;
+package com.jordanabderrachid.n26.datastores;
+
+import com.jordanabderrachid.n26.exceptions.AlreadyUsedTransactionIdException;
+import com.jordanabderrachid.n26.exceptions.UnknownTransactionIdException;
+import com.jordanabderrachid.n26.exceptions.UnknownTransactionParentIdException;
+import com.jordanabderrachid.n26.models.Transaction;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -76,11 +81,11 @@ public class TransactionStoreMemory implements TransactionStore {
   public List<Long> getTransactionsIdByType(String type) {
     this.lock.lock();
     try {
-     if (!this.types.containsKey(type)) {
-       return new LinkedList<>();
-     }
+      if (!this.types.containsKey(type)) {
+        return new LinkedList<>();
+      }
 
-     return new LinkedList<>(this.types.get(type));
+      return new LinkedList<>(this.types.get(type));
     } finally {
       this.lock.unlock();
     }
@@ -99,4 +104,3 @@ public class TransactionStoreMemory implements TransactionStore {
     }
   }
 }
-

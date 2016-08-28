@@ -1,4 +1,7 @@
-package hello;
+package com.jordanabderrachid.n26.validators;
+
+import com.jordanabderrachid.n26.exceptions.InvalidTransactionException;
+import com.jordanabderrachid.n26.models.Transaction;
 
 public class TransactionValidator {
 

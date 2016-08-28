@@ -1,4 +1,4 @@
-package hello;
+package com.jordanabderrachid.n26.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

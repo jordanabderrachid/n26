@@ -1,4 +1,9 @@
-package hello;
+package com.jordanabderrachid.n26;
+
+import com.jordanabderrachid.n26.datastores.TransactionStore;
+import com.jordanabderrachid.n26.datastores.TransactionStoreMemory;
+import com.jordanabderrachid.n26.services.TransactionService;
+import com.jordanabderrachid.n26.validators.TransactionValidator;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

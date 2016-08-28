@@ -1,4 +1,4 @@
-package hello;
+package com.jordanabderrachid.n26.exceptions;
 
 public class UnknownTransactionParentIdException extends Exception {
 
