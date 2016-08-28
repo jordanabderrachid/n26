@@ -11,12 +11,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * Implementation of the transaction store in the memory.
+ *
+ * @author jordanabderrachid
+ */
 public class TransactionStoreMemory implements TransactionStore {
 
+  /**
+   * map the transaction id to the transaction
+   */
   private Map<Long, Transaction> transactions;
 
+  /**
+   * map a transaction type to a list of transaction ids
+   */
   private Map<String, List<Long>> types;
 
+  /**
+   * map the id of a parent transaction to the list of child transaction ids
+   */
   private Map<Long, List<Long>> transactionRelations;
 
   private ReentrantLock lock;
@@ -28,6 +42,17 @@ public class TransactionStoreMemory implements TransactionStore {
     this.lock = new ReentrantLock();
   }
 
+  /**
+   * Add a {@link Transaction} to the store. If the transaction id is already used, a {@link AlreadyUsedTransactionIdException}
+   * is thrown. If the parent id of the transaction is unknown, a {@link UnknownTransactionParentIdException} is
+   * thrown.
+   *
+   * A lock is used to handle concurrency access to the data.
+   *
+   * @param transaction - the transaction to add
+   * @throws AlreadyUsedTransactionIdException
+   * @throws UnknownTransactionParentIdException
+   */
   public void addTransaction(Transaction transaction)
     throws AlreadyUsedTransactionIdException, UnknownTransactionParentIdException {
     this.lock.lock();
@@ -64,6 +89,16 @@ public class TransactionStoreMemory implements TransactionStore {
     }
   }
 
+  /**
+   * Get a {@link Transaction} by its transaction id. If the id is unknown, a {@link UnknownTransactionIdException} is
+   * thrown.
+   *
+   * A lock is used to handle concurrency access to the data.
+   *
+   * @param transactionId - the id of the transaction
+   * @return the transaction
+   * @throws UnknownTransactionIdException
+   */
   public Transaction getTransaction(Long transactionId)
     throws UnknownTransactionIdException {
     this.lock.lock();
@@ -78,6 +113,14 @@ public class TransactionStoreMemory implements TransactionStore {
     }
   }
 
+  /**
+   * Get the list of transaction id of the given type.
+   *
+   * A lock is used to handle concurrency access to the data.
+   *
+   * @param type - the transaction type
+   * @return the list of the transaction ids
+   */
   public List<Long> getTransactionsIdByType(String type) {
     this.lock.lock();
     try {
@@ -91,6 +134,14 @@ public class TransactionStoreMemory implements TransactionStore {
     }
   }
 
+  /**
+   * Get the list of child transaction id of the given parent transaction id.
+   *
+   * A lock is used to handle concurrency access to the data.
+   *
+   * @param transactionId - the parent transaction id
+   * @return the list of child transactions ids
+   */
   public List<Long> getChildTransactionsId(Long transactionId) {
     this.lock.lock();
     try {

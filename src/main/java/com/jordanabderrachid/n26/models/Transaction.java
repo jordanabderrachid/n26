@@ -4,6 +4,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * This class represents a transaction.
+ *
+ * @author jordanabderrachid
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Transaction {
   private Long id;
